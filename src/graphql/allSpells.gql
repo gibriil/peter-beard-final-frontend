@@ -1,0 +1,7 @@
+query allSpells {
+  Spells {
+    id,
+    name,
+    level
+  }
+}

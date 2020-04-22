@@ -1,0 +1,8 @@
+query allArmour {
+  AllArmour {
+    id,
+    name,
+    cost,
+    weight
+  }
+}

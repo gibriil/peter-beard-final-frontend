@@ -1,0 +1,8 @@
+query allWeapons {
+  Weapons {
+    id,
+    name,
+    cost,
+    weight
+  }
+}
