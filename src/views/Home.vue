@@ -1,14 +1,11 @@
 <template>
   <div class="home">
-    <GMguide></GMguide>
+    <b-jumbotron fluid>
+      <template v-slot:header>Tunnels & Trolls</template>
+      <template v-slot:lead>
+        This is a fullstack app for the
+        <abbr titl="Tunnels & Trolls">T&T</abbr> role-playing game
+      </template>
+    </b-jumbotron>
   </div>
 </template>
-
-<script>
-// @ is an alias to /src
-import GMguide from "@/views/GMguide.vue";
-
-export default {
-  components: { GMguide }
-};
-</script>
