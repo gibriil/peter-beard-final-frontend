@@ -4,14 +4,14 @@
     <b-table
       responsive
       small
-      hover
-      selectable
+      striped
       fixed
       :items="GetAPI"
       :fields="fields"
       caption-top
       :tbody-tr-attr="trID"
       head-variant="dark"
+      outlined
     >
       <template v-slot:table-busy>
         <div class="text-center text-danger my-2">
@@ -19,7 +19,9 @@
           <strong>Loading...</strong>
         </div>
       </template>
-      <template v-slot:row-details="row">{{row.item.info}}</template>
+      <template v-slot:row-details="row">
+        <p v-if="row.item.info" class="font-weight-lighter font-italic w-25">({{row.item.info}})</p>
+      </template>
     </b-table>
   </div>
 </template>
