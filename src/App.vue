@@ -10,13 +10,7 @@
         leave-active-class="animated fadeOutDownBig faster delay-1s"
         type="animation"
       >
-        <b-container fluid="xl">
-          <b-row>
-            <b-col>
-              <router-view />
-            </b-col>
-          </b-row>
-        </b-container>
+        <router-view />
       </transition>
     </main>
     <Footer></Footer>
