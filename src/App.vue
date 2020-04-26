@@ -1,43 +1,39 @@
 <template>
   <div id="app">
-    <!-- Apollo watched Graphql query -->
-    <ApolloQuery :query="require('./graphql/allArmour.gql')">
-      <template slot-scope="{ result: { loading, error, data } }">
-        <!-- Loading -->
-        <div v-if="loading" class="loading apollo">Loading...</div>
-
-        <!-- Error -->
-        <div v-else-if="error" class="error apollo">An error occured</div>
-
-        <!-- Result -->
-        <div v-else-if="data" class="result apollo">{{ data.AllArmour }}</div>
-
-        <!-- No result -->
-        <div v-else class="no-result apollo">No result :(</div>
-      </template>
-    </ApolloQuery>
+    <Header></Header>
+    <main id="page-wrap" class="content-wrap">
+      <transition
+        appear
+        mode="out-in"
+        appear-active-class="animated fadeInUpBig fast"
+        enter-active-class="animated fadeInUpBig fast"
+        leave-active-class="animated fadeOutDownBig faster delay-1s"
+        type="animation"
+      >
+        <b-container fluid="xl">
+          <b-row>
+            <b-col>
+              <router-view />
+            </b-col>
+          </b-row>
+        </b-container>
+      </transition>
+    </main>
+    <Footer></Footer>
   </div>
 </template>
 
-<style lang="less">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import Header from "./components/wrapper/Header.vue";
+import Footer from "./components/wrapper/Footer.vue";
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+export default {
+  components: {
+    Header,
+    Footer
   }
-}
+};
+</script>
+
+<style lang="less">
 </style>

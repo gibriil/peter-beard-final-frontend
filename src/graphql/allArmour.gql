@@ -1,8 +1,13 @@
 query allArmour {
   AllArmour {
-    id,
-    name,
-    cost,
+    id
+    name
+    category
+    type
+    hits
+    strengthReq
+    cost
     weight
+    extraInfo
   }
 }

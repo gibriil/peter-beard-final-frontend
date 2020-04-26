@@ -1,7 +1,11 @@
 query allSpells {
   Spells {
-    id,
-    name,
+    id
+    symbol
+    name
     level
+    description
+    cost
+    range
   }
 }

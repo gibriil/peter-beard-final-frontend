@@ -1,8 +1,17 @@
 query allWeapons {
   Weapons {
-    id,
-    name,
-    cost,
+    id
+    name
+    category
+    type
+    dice
+    adds
+    strengthReq
+    dexReq
+    cost
     weight
+    range
+    length
+    extraInfo
   }
 }
