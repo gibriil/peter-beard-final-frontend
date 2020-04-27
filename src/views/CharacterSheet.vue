@@ -34,7 +34,7 @@ import CreateCharacter from "@/components/CreateCharacter.vue";
 export default {
   data: () => ({
     restapi: {
-      component: "GetCharacters"
+      component: "CreateCharacter"
     }
   }),
   components: { GetCharacters, CreateCharacter }

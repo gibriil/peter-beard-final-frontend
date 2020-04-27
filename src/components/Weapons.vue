@@ -19,7 +19,7 @@
         <div v-else-if="data" class="result apollo">
           <h2>Swords</h2>
           <template
-            v-for="swords in GetSwords(data.Weapons.filter(wpn => wpn.category == 'swords'))"
+            v-for="swords in GetWeapons(data.Weapons.filter(wpn => wpn.category == 'swords'))"
           >
             <b-table
               responsive
@@ -36,6 +36,32 @@
             >
               <template v-slot:table-caption>
                 <h3>{{swords.type}}</h3>
+              </template>
+              <template v-slot:cell(diceAdds)="data">
+                {{ data.item.dice }}
+                <template v-if="data.item.adds">+ {{ data.item.adds }}</template>
+              </template>
+            </b-table>
+          </template>
+          <h2>Projectile Weapons</h2>
+          <template
+            v-for="weapon in GetWeapons(data.Weapons.filter(wpn => wpn.category == 'Projectile Weapons'))"
+          >
+            <b-table
+              responsive
+              small
+              hover
+              selectable
+              :items="weapon.data"
+              :fields="projectileFields"
+              :key="weapon.type"
+              caption-top
+              :tbody-tr-attr="trID"
+              head-variant="dark"
+              striped
+            >
+              <template v-slot:table-caption>
+                <h3>{{weapon.type}}</h3>
               </template>
               <template v-slot:cell(diceAdds)="data">
                 {{ data.item.dice }}
@@ -62,30 +88,23 @@ export default {
       { key: "dexReq", label: "DEX req." },
       "cost",
       "weight"
+    ],
+    projectileFields: [
+      "name",
+      { key: "diceAdds", label: "Dice + Adds" },
+      { key: "strengthReq", label: "ST req." },
+      { key: "dexReq", label: "DEX req." },
+      "cost",
+      "weight",
+      "range"
     ]
   }),
   methods: {
-    GetSwords(arr) {
+    GetWeapons(arr) {
       return [
         {
-          type: "Class I: Straight Swords",
-          data: arr.filter(swrd => swrd.type.includes("Class I"))
-        },
-        {
-          type: "Class II: Curved Swords",
-          data: arr.filter(swrd => swrd.type.includes("Class II"))
-        },
-        {
-          type: "Class III: Unusal Swords",
-          data: arr.filter(swrd => swrd.type.includes("Class III"))
-        },
-        {
-          type: "Class IV: Gentleman's Towne Swords",
-          data: arr.filter(swrd => swrd.type.includes("Class IV"))
-        },
-        {
-          type: "Class V: Bizarre Swords",
-          data: arr.filter(swrd => swrd.type.includes("Class V"))
+          type: `${arr.filter(wpn => wpn.type.includes("Class I"))[0].type}`,
+          data: arr.filter(wpn => wpn.type.includes("Class I"))
         }
       ];
     },

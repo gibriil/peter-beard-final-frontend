@@ -62,88 +62,16 @@ export default {
   }),
   methods: {
     GetSpells(arr) {
-      return [
-        {
-          type: "Level 1 Spells",
-          data: arr.filter(spell => spell.level == 1)
-        },
-        {
-          type: "Level 2 Spells",
-          data: arr.filter(spell => spell.level == 2)
-        },
-        {
-          type: "Level 3 Spells",
-          data: arr.filter(spell => spell.level == 3)
-        },
-        {
-          type: "Level 4 Spells",
-          data: arr.filter(spell => spell.level == 4)
-        },
-        {
-          type: "Level 5 Spells",
-          data: arr.filter(spell => spell.level == 5)
-        },
-        {
-          type: "Level 6 Spells",
-          data: arr.filter(spell => spell.level == 6)
-        },
-        {
-          type: "Level 7 Spells",
-          data: arr.filter(spell => spell.level == 7)
-        },
-        {
-          type: "Level 8 Spells",
-          data: arr.filter(spell => spell.level == 8)
-        },
-        {
-          type: "Level 9 Spells",
-          data: arr.filter(spell => spell.level == 9)
-        },
-        {
-          type: "Level 10 Spells",
-          data: arr.filter(spell => spell.level == 10)
-        },
-        {
-          type: "Level 11 Spells",
-          data: arr.filter(spell => spell.level == 11)
-        },
-        {
-          type: "Level 12 Spells",
-          data: arr.filter(spell => spell.level == 12)
-        },
-        {
-          type: "Level 13 Spells",
-          data: arr.filter(spell => spell.level == 13)
-        },
-        {
-          type: "Level 14 Spells",
-          data: arr.filter(spell => spell.level == 14)
-        },
-        {
-          type: "Level 15 Spells",
-          data: arr.filter(spell => spell.level == 15)
-        },
-        {
-          type: "Level 16 Spells",
-          data: arr.filter(spell => spell.level == 16)
-        },
-        {
-          type: "Level 17 Spells",
-          data: arr.filter(spell => spell.level == 17)
-        },
-        {
-          type: "Level 18 Spells",
-          data: arr.filter(spell => spell.level == 18)
-        },
-        {
-          type: "Level 19 Spells",
-          data: arr.filter(spell => spell.level == 19)
-        },
-        {
-          type: "Level 20 Spells",
-          data: arr.filter(spell => spell.level == 20)
-        }
-      ];
+      let spells = [];
+
+      for (let i = 1; i < 21; i++) {
+        spells.push({
+          type: `Level ${i} Spells`,
+          data: arr.filter(spell => spell.level == i)
+        });
+      }
+
+      return spells;
     },
     trID(item, type) {
       if (!item || type !== "row") return;
