@@ -24,7 +24,7 @@
         <!-- Loading -->
         <div v-if="isLoading" class="loading apollo">
           <div class="text-danger my-2">
-            <b-spinner class="align-middle"></b-spinner>
+            <b-spinner class="align-middle mr-2"></b-spinner>
             <strong>Loading...</strong>
           </div>
         </div>
