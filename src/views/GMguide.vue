@@ -10,7 +10,7 @@
           :to="'/gm-guide/weapons'"
           :pressed="$route.fullPath == '/gm-guide/weapons'"
         >Weapons</b-button>
-        <b-button :to="'/gm-guide/armour'" :pressedc="$route.fullPath == '/gm-guide/armour'">Armour</b-button>
+        <b-button :to="'/gm-guide/armour'" :pressed="$route.fullPath == '/gm-guide/armour'">Armour</b-button>
         <b-button :to="'/gm-guide/spells'" :pressed="$route.fullPath == '/gm-guide/spells'">Spells</b-button>
         <b-button
           :to="'/gm-guide/supplies'"
