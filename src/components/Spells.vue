@@ -8,7 +8,7 @@
     </div>
     <!-- Apollo watched Graphql query -->
     <ApolloQuery :query="require('@/graphql/allSpells.gql')">
-      <template slot-scope="{ result: { loading, error, data }, query }">
+      <template slot-scope="{ result: { loading, error, data }, query, isLoading }">
         <!-- Add Spell Popup -->
         <b-modal
           id="addSpell"
@@ -20,8 +20,8 @@
           <CreateSpell></CreateSpell>
         </b-modal>
         <!-- Loading -->
-        <div v-if="loading" class="loading apollo">
-          <div class="text-center text-danger my-2">
+        <div v-if="isLoading" class="loading apollo">
+          <div class="text-danger my-2">
             <b-spinner class="align-middle"></b-spinner>
             <strong>Loading...</strong>
           </div>
