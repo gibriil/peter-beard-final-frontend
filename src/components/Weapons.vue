@@ -1,6 +1,7 @@
 <template>
   <div id="weaponsVue">
     <h1>Weapons Charts</h1>
+    <b-link :to="'/admin/weapon'">Add Weapon</b-link>
     <!-- Apollo watched Graphql query -->
     <ApolloQuery :query="require('@/graphql/allWeapons.gql')">
       <template slot-scope="{ result: { loading, error, data } }">
@@ -111,6 +112,33 @@ export default {
     trID(item, type) {
       if (!item || type !== "row") return;
       if (item) return { "data-weapon-id": item.id };
+    },
+    checkFormValidity() {
+      const valid = this.$refs.form.checkValidity();
+      this.nameState = valid;
+      return valid;
+    },
+    resetModal() {
+      this.name = "";
+      this.nameState = null;
+    },
+    handleOk(bvModalEvt) {
+      // Prevent modal from closing
+      bvModalEvt.preventDefault();
+      // Trigger submit handler
+      this.handleSubmit();
+    },
+    handleSubmit() {
+      // Exit when the form isn't valid
+      if (!this.checkFormValidity()) {
+        return;
+      }
+      // Push the name to submitted names
+      this.submittedNames.push(this.name);
+      // Hide the modal manually
+      this.$nextTick(() => {
+        this.$bvModal.hide("modal-prevent-closing");
+      });
     }
   }
 };

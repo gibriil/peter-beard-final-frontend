@@ -30,13 +30,19 @@
 // @ is an alias to /src
 import GetCharacters from "@/components/GetCharacters.vue";
 import CreateCharacter from "@/components/CreateCharacter.vue";
+import { eBus } from "../main.js";
 
 export default {
   data: () => ({
     restapi: {
-      component: "CreateCharacter"
+      component: "GetCharacters"
     }
   }),
-  components: { GetCharacters, CreateCharacter }
+  components: { GetCharacters, CreateCharacter },
+  created() {
+    eBus.$on("CharacterComponent", ({ component }) => {
+      this.restapi.component = component;
+    });
+  }
 };
 </script>

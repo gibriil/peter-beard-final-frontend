@@ -1,0 +1,23 @@
+mutation createOneWeapon($name: String!, $category: String!, $type: String!, $dice: Int!, $adds: Int, $strengthReq: Int!, $dexReq: Int, $cost: Int!, $weight: Int!, $range: String, $length: String, $extraInfo: String) {
+  createOneWeapon(data: {
+    name: $name,
+    category: $category,
+    type: $type,
+    dice: $dice,
+    adds: $adds,
+    strengthReq: $strengthReq
+    dexReq: $dexReq,
+    cost: $cost,
+    weight: $weight,
+    range: $range,
+    length: $length,
+    extraInfo: $extraInfo
+      }) {
+    id,
+    name,
+    dice,
+    adds,
+    cost,
+    weight
+  }
+}

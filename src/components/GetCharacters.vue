@@ -98,18 +98,18 @@
   </div>
 </template>
 <script>
+import axios from "axios";
+
 export default {
   data: () => ({
     characters: []
   }),
   created() {
     let $vm = this;
-    fetch("https://pbeard-tunnels-and-trolls.herokuapp.com/characters")
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        $vm.characters = data || [];
+    axios
+      .get("https://pbeard-tunnels-and-trolls.herokuapp.com/characters")
+      .then(res => {
+        $vm.characters = res.data.reverse() || [];
       })
       .catch(err => console.log(err));
   },

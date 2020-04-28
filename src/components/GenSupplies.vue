@@ -27,6 +27,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data: () => ({
     fields: ["name", "cost", "weight"]
@@ -37,15 +39,11 @@ export default {
       if (item) return { "data-weapon-id": item._id };
     },
     GetAPI() {
-      return fetch(
-        "https://pbeard-tunnels-and-trolls.herokuapp.com/generalsupply"
-      )
-        .then(response => {
-          return response.json();
-        })
-        .then(data => {
+      return axios
+        .get("https://pbeard-tunnels-and-trolls.herokuapp.com/generalsupply")
+        .then(res => {
           return (
-            data.map(itm => {
+            res.data.map(itm => {
               return { ...itm, _showDetails: true };
             }) || []
           );

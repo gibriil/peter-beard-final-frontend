@@ -53,6 +53,171 @@
 
         <b-form-invalid-feedback id="type-live-feedback">This is a required field.</b-form-invalid-feedback>
       </b-form-group>
+      <b-form-group id="lvl-group" label="lvl" label-for="lvl">
+        <b-form-input
+          id="lvl"
+          name="lvl"
+          v-model="$v.form.lvl.$model"
+          :state="validateState('lvl')"
+          aria-describedby="lvl-live-feedback"
+        ></b-form-input>
+
+        <b-form-invalid-feedback id="lvl-live-feedback">This is a required field.</b-form-invalid-feedback>
+      </b-form-group>
+      <b-form-group id="age-group" label="age" label-for="age">
+        <b-form-input
+          id="age"
+          name="age"
+          v-model="$v.form.age.$model"
+          :state="validateState('age')"
+          aria-describedby="age-live-feedback"
+        ></b-form-input>
+
+        <b-form-invalid-feedback id="age-live-feedback">This is a required field.</b-form-invalid-feedback>
+      </b-form-group>
+      <b-form-group id="height-group" label="height" label-for="height">
+        <b-form-input
+          id="height"
+          name="height"
+          v-model="$v.form.height.$model"
+          :state="validateState('height')"
+          aria-describedby="height-live-feedback"
+        ></b-form-input>
+
+        <b-form-invalid-feedback id="height-live-feedback">This is a required field.</b-form-invalid-feedback>
+      </b-form-group>
+      <b-form-group id="weight-group" label="weight" label-for="weight">
+        <b-form-input
+          id="weight"
+          name="weight"
+          v-model="$v.form.weight.$model"
+          :state="validateState('weight')"
+          aria-describedby="weight-live-feedback"
+        ></b-form-input>
+
+        <b-form-invalid-feedback id="weight-live-feedback">This is a required field.</b-form-invalid-feedback>
+      </b-form-group>
+      <b-form-group id="ST-group" label="ST" label-for="ST">
+        <b-form-input
+          id="ST"
+          name="ST"
+          v-model="$v.form.ST.$model"
+          :state="validateState('ST')"
+          aria-describedby="ST-live-feedback"
+        ></b-form-input>
+
+        <b-form-invalid-feedback id="ST-live-feedback">This is a required field.</b-form-invalid-feedback>
+      </b-form-group>
+      <b-form-group id="IQ-group" label="IQ" label-for="IQ">
+        <b-form-input
+          id="IQ"
+          name="IQ"
+          v-model="$v.form.IQ.$model"
+          :state="validateState('IQ')"
+          aria-describedby="IQ-live-feedback"
+        ></b-form-input>
+
+        <b-form-invalid-feedback id="IQ-live-feedback">This is a required field.</b-form-invalid-feedback>
+      </b-form-group>
+      <b-form-group id="LK-group" label="LK" label-for="LK">
+        <b-form-input
+          id="LK"
+          name="LK"
+          v-model="$v.form.LK.$model"
+          :state="validateState('LK')"
+          aria-describedby="LK-live-feedback"
+        ></b-form-input>
+
+        <b-form-invalid-feedback id="LK-live-feedback">This is a required field.</b-form-invalid-feedback>
+      </b-form-group>
+      <b-form-group id="CON-group" label="CON" label-for="CON">
+        <b-form-input
+          id="CON"
+          name="CON"
+          v-model="$v.form.CON.$model"
+          :state="validateState('CON')"
+          aria-describedby="CON-live-feedback"
+        ></b-form-input>
+
+        <b-form-invalid-feedback id="CON-live-feedback">This is a required field.</b-form-invalid-feedback>
+      </b-form-group>
+      <b-form-group id="DEX-group" label="DEX" label-for="DEX">
+        <b-form-input
+          id="DEX"
+          name="DEX"
+          v-model="$v.form.DEX.$model"
+          :state="validateState('DEX')"
+          aria-describedby="DEX-live-feedback"
+        ></b-form-input>
+
+        <b-form-invalid-feedback id="DEX-live-feedback">This is a required field.</b-form-invalid-feedback>
+      </b-form-group>
+      <b-form-group id="CHR-group" label="CHR" label-for="CHR">
+        <b-form-input
+          id="CHR"
+          name="CHR"
+          v-model="$v.form.CHR.$model"
+          :state="validateState('CHR')"
+          aria-describedby="CHR-live-feedback"
+        ></b-form-input>
+
+        <b-form-invalid-feedback id="CHR-live-feedback">This is a required field.</b-form-invalid-feedback>
+      </b-form-group>
+      <b-form-group id="personalAdds-group" label="personalAdds" label-for="personalAdds">
+        <b-form-input
+          id="personalAdds"
+          name="personalAdds"
+          v-model="$v.form.personalAdds.$model"
+          :state="validateState('personalAdds')"
+          aria-describedby="personalAdds-live-feedback"
+        ></b-form-input>
+
+        <b-form-invalid-feedback id="personalAdds-live-feedback">This is a required field.</b-form-invalid-feedback>
+      </b-form-group>
+      <b-form-group id="weightPossible-group" label="weightPossible" label-for="weightPossible">
+        <b-form-input
+          id="weightPossible"
+          name="weightPossible"
+          v-model="$v.form.weightPossible.$model"
+          :state="validateState('weightPossible')"
+          aria-describedby="weightPossible-live-feedback"
+        ></b-form-input>
+
+        <b-form-invalid-feedback id="weightPossible-live-feedback">This is a required field.</b-form-invalid-feedback>
+      </b-form-group>
+      <b-form-group id="weightCarried-group" label="weightCarried" label-for="weightCarried">
+        <b-form-input
+          id="weightCarried"
+          name="weightCarried"
+          v-model="$v.form.weightCarried.$model"
+          :state="validateState('weightCarried')"
+          aria-describedby="weightCarried-live-feedback"
+        ></b-form-input>
+
+        <b-form-invalid-feedback id="weightCarried-live-feedback">This is a required field.</b-form-invalid-feedback>
+      </b-form-group>
+      <b-form-group id="gp-group" label="gp" label-for="gp">
+        <b-form-input
+          id="gp"
+          name="gp"
+          v-model="$v.form.gp.$model"
+          :state="validateState('gp')"
+          aria-describedby="gp-live-feedback"
+        ></b-form-input>
+
+        <b-form-invalid-feedback id="gp-live-feedback">This is a required field.</b-form-invalid-feedback>
+      </b-form-group>
+      <b-form-group id="ap-group" label="ap" label-for="ap">
+        <b-form-input
+          id="ap"
+          name="ap"
+          v-model="$v.form.ap.$model"
+          :state="validateState('ap')"
+          aria-describedby="ap-live-feedback"
+        ></b-form-input>
+
+        <b-form-invalid-feedback id="ap-live-feedback">This is a required field.</b-form-invalid-feedback>
+      </b-form-group>
 
       <b-button type="submit" variant="primary">Submit</b-button>
     </b-form>
@@ -61,7 +226,9 @@
 
 <script>
 import { validationMixin } from "vuelidate";
-import { required, minLength } from "vuelidate/lib/validators";
+import { required, minLength, numeric } from "vuelidate/lib/validators";
+import axios from "axios";
+import { eBus } from "../main.js";
 
 export default {
   mixins: [validationMixin],
@@ -84,7 +251,7 @@ export default {
       { value: null, text: "Choose..." },
       { value: "warrior", text: "Warrior" },
       { value: "wizard", text: "Wizard" },
-      { value: "rogue", text: "Rogue" },
+      { value: "rouge", text: "Rogue" },
       { value: "warrior-wizard", text: "Warrior-Wizard" }
     ],
     form: {
@@ -111,18 +278,76 @@ export default {
   }),
   validations: {
     form: {
-      kin: {
-        required
+      name: {
+        required,
+        minLength: minLength(3)
       },
-      sex: {
+      kin: {
         required
       },
       type: {
         required
       },
-      name: {
-        required,
-        minLength: minLength(3)
+      sex: {
+        required
+      },
+      lvl: {
+        numeric,
+        required
+      },
+      age: {
+        numeric
+      },
+      height: {
+        required
+      },
+      weight: {
+        numeric,
+        required
+      },
+      ST: {
+        numeric,
+        required
+      },
+      IQ: {
+        numeric,
+        required
+      },
+      LK: {
+        numeric,
+        required
+      },
+      CON: {
+        numeric,
+        required
+      },
+      DEX: {
+        numeric,
+        required
+      },
+      CHR: {
+        numeric,
+        required
+      },
+      personalAdds: {
+        numeric,
+        required
+      },
+      weightPossible: {
+        numeric,
+        required
+      },
+      weightCarried: {
+        numeric,
+        required
+      },
+      gp: {
+        numeric,
+        required
+      },
+      ap: {
+        numeric,
+        required
       }
     }
   },
@@ -137,7 +362,44 @@ export default {
         return;
       }
 
-      alert("Form submitted!");
+      let form = this.form;
+
+      axios
+        .post(
+          "https://pbeard-tunnels-and-trolls.herokuapp.com/characters",
+          form
+        )
+        .then(data => {
+          console.log("Success:", data);
+          eBus.$emit("CharacterComponent", {
+            component: "GetCharacters"
+          });
+        })
+        .catch(error => {
+          console.error("Error:", error);
+        });
+
+      // this.form = {
+      //   name: null,
+      //   kin: null,
+      //   type: null,
+      //   sex: null,
+      //   lvl: null,
+      //   age: null,
+      //   height: null,
+      //   weight: null,
+      //   ST: null,
+      //   IQ: null,
+      //   LK: null,
+      //   CON: null,
+      //   DEX: null,
+      //   CHR: null,
+      //   personalAdds: null,
+      //   weightPossible: null,
+      //   weightCarried: null,
+      //   gp: null,
+      //   ap: null
+      // };
     }
   }
 };
