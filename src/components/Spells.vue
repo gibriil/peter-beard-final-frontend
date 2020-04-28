@@ -38,6 +38,8 @@
               small
               hover
               selectable
+              select-mode="single"
+              @row-selected="OnSelect"
               fixed
               :items="spells.data"
               :fields="fields"
@@ -97,6 +99,11 @@ export default {
     },
     refreshQuery(query) {
       query.refetch();
+    },
+    OnSelect(items) {
+      if (items.length > 0) {
+        this.$router.push(`/spell/${items[0].id}`);
+      }
     }
   }
 };

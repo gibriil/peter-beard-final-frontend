@@ -7,20 +7,14 @@
       >API output for GraphGL queries for Weapons, Armour, and Spells. Restful API output for General Supplies</template>
       <b-button-group size="lg" class="flex-wrap">
         <b-button
-          @click="guide.component = 'Weapons'"
-          :pressed.sync="guide.component == 'Weapons'"
+          :to="'/gm-guide/weapons'"
+          :pressed="$route.fullPath == '/gm-guide/weapons'"
         >Weapons</b-button>
+        <b-button :to="'/gm-guide/armour'" :pressedc="$route.fullPath == '/gm-guide/armour'">Armour</b-button>
+        <b-button :to="'/gm-guide/spells'" :pressed="$route.fullPath == '/gm-guide/spells'">Spells</b-button>
         <b-button
-          @click="guide.component = 'Armour'"
-          :pressed.sync="guide.component == 'Armour'"
-        >Armour</b-button>
-        <b-button
-          @click="guide.component = 'Spells'"
-          :pressed.sync="guide.component == 'Spells'"
-        >Spells</b-button>
-        <b-button
-          @click="guide.component = 'GenSupplies'"
-          :pressed.sync="guide.component == 'GenSupplies'"
+          :to="'/gm-guide/supplies'"
+          :pressed="$route.fullPath == '/gm-guide/supplies'"
         >General Supplies</b-button>
       </b-button-group>
     </b-jumbotron>
@@ -28,7 +22,16 @@
       <b-container fluid="xl">
         <b-row>
           <b-col>
-            <component :is="guide.component"></component>
+            <transition
+              appear
+              mode="out-in"
+              appear-active-class="animated fadeInUpBig fast"
+              enter-active-class="animated fadeInUpBig fast"
+              leave-active-class="animated fadeOutDownBig faster delay-1s"
+              type="animation"
+            >
+              <router-view />
+            </transition>
           </b-col>
         </b-row>
       </b-container>
@@ -37,18 +40,11 @@
 </template>
 
 <script>
-// @ is an alias to /src
-import Weapons from "@/components/Weapons.vue";
-import Armour from "@/components/Armour.vue";
-import Spells from "@/components/Spells.vue";
-import GenSupplies from "@/components/GenSupplies.vue";
-
 export default {
   data: () => ({
     guide: {
       component: "Weapons"
     }
-  }),
-  components: { Weapons, Armour, Spells, GenSupplies }
+  })
 };
 </script>

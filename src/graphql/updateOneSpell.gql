@@ -1,0 +1,20 @@
+mutation createOneSpell ($id: String!, $name: String!, $level: Int!, $description: String!, $cost: String!, $range: String!, $symbol: String!) {
+  updateOneSpell(data: {
+    name: $name,
+    level: $level,
+    description: $description,
+    cost: $cost,
+    range: $range,
+    symbol: $symbol
+  }, where: {
+    id: $id
+  }){
+    id,
+    symbol,
+    name,
+    level,
+    description,
+    cost,
+    range
+  }
+}

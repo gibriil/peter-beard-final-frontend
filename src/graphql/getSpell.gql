@@ -1,0 +1,13 @@
+query createOneSpell ($id: String!) {
+  spell(where: {
+    id: $id
+  }){
+    id,
+    symbol,
+    name,
+    level,
+    description,
+    cost,
+    range
+  }
+}
