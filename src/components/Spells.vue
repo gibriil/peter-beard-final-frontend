@@ -1,6 +1,11 @@
 <template>
   <div id="spellsVue">
-    <h1>Spells</h1>
+    <div class="d-flex">
+      <h1>Spells</h1>
+      <p @click="$bvModal.show('addSpell')">
+        <b-icon icon="plus-square" class="mr-2"></b-icon>Add Spell
+      </p>
+    </div>
     <!-- Apollo watched Graphql query -->
     <ApolloQuery :query="require('@/graphql/allSpells.gql')">
       <template slot-scope="{ result: { loading, error, data } }">

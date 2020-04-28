@@ -46,7 +46,7 @@ import GenSupplies from "@/components/GenSupplies.vue";
 export default {
   data: () => ({
     guide: {
-      component: "GenSupplies"
+      component: "Weapons"
     }
   }),
   components: { Weapons, Armour, Spells, GenSupplies }

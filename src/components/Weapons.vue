@@ -1,7 +1,16 @@
 <template>
   <div id="weaponsVue">
-    <h1>Weapons Charts</h1>
-    <b-link :to="'/admin/weapon'">Add Weapon</b-link>
+    <div class="d-flex">
+      <h1>Weapons Charts</h1>
+      <p @click="$bvModal.show('addWeapon')">
+        <b-icon icon="plus-square" class="mr-2"></b-icon>Add Weapon
+      </p>
+    </div>
+
+    <b-modal id="addWeapon" hide-footer title="Add Weapon" scrollable>
+      <CreateWeapon></CreateWeapon>
+    </b-modal>
+
     <!-- Apollo watched Graphql query -->
     <ApolloQuery :query="require('@/graphql/allWeapons.gql')">
       <template slot-scope="{ result: { loading, error, data } }">
@@ -18,57 +27,31 @@
 
         <!-- Result -->
         <div v-else-if="data" class="result apollo">
-          <h2>Swords</h2>
-          <template
-            v-for="swords in GetWeapons(data.Weapons.filter(wpn => wpn.category == 'swords'))"
-          >
-            <b-table
-              responsive
-              small
-              hover
-              selectable
-              :items="swords.data"
-              :fields="swordfields"
-              :key="swords.type"
-              caption-top
-              :tbody-tr-attr="trID"
-              head-variant="dark"
-              striped
-            >
-              <template v-slot:table-caption>
-                <h3>{{swords.type}}</h3>
-              </template>
-              <template v-slot:cell(diceAdds)="data">
-                {{ data.item.dice }}
-                <template v-if="data.item.adds">+ {{ data.item.adds }}</template>
-              </template>
-            </b-table>
-          </template>
-          <h2>Projectile Weapons</h2>
-          <template
-            v-for="weapon in GetWeapons(data.Weapons.filter(wpn => wpn.category == 'Projectile Weapons'))"
-          >
-            <b-table
-              responsive
-              small
-              hover
-              selectable
-              :items="weapon.data"
-              :fields="projectileFields"
-              :key="weapon.type"
-              caption-top
-              :tbody-tr-attr="trID"
-              head-variant="dark"
-              striped
-            >
-              <template v-slot:table-caption>
-                <h3>{{weapon.type}}</h3>
-              </template>
-              <template v-slot:cell(diceAdds)="data">
-                {{ data.item.dice }}
-                <template v-if="data.item.adds">+ {{ data.item.adds }}</template>
-              </template>
-            </b-table>
+          <template v-for="wpn in weapontypes">
+            <h2 :key="wpn">{{ wpn }}</h2>
+            <template v-for="weapon in GetWeapons(data.Weapons.filter(itm => itm.category == wpn))">
+              <b-table
+                responsive
+                small
+                hover
+                selectable
+                :items="weapon.data"
+                :fields="weapontables[wpn]"
+                :key="weapon.type || weapon.category"
+                caption-top
+                :tbody-tr-attr="trID"
+                head-variant="dark"
+                striped
+              >
+                <template v-if="weapon.type" v-slot:table-caption>
+                  <h3>{{weapon.type}}</h3>
+                </template>
+                <template v-slot:cell(diceAdds)="data">
+                  {{ data.item.dice }}
+                  <template v-if="data.item.adds">+ {{ data.item.adds }}</template>
+                </template>
+              </b-table>
+            </template>
           </template>
         </div>
 
@@ -80,65 +63,104 @@
 </template>
 
 <script>
+import CreateWeapon from "@/components/CreateWeapon.vue";
+
 export default {
+  components: { CreateWeapon },
   data: () => ({
-    swordfields: [
-      "name",
-      { key: "diceAdds", label: "Dice + Adds" },
-      { key: "strengthReq", label: "ST req." },
-      { key: "dexReq", label: "DEX req." },
-      "cost",
-      "weight"
-    ],
-    projectileFields: [
-      "name",
-      { key: "diceAdds", label: "Dice + Adds" },
-      { key: "strengthReq", label: "ST req." },
-      { key: "dexReq", label: "DEX req." },
-      "cost",
-      "weight",
-      "range"
+    weapontables: {
+      Swords: [
+        "name",
+        { key: "diceAdds", label: "Dice + Adds" },
+        { key: "strengthReq", label: "ST req." },
+        { key: "dexReq", label: "DEX req." },
+        "cost",
+        "weight"
+      ],
+      "Hafted Weapons": [
+        "name",
+        { key: "diceAdds", label: "Dice + Adds" },
+        { key: "strengthReq", label: "ST req." },
+        { key: "dexReq", label: "DEX req." },
+        "cost",
+        "weight"
+      ],
+      "Pole Weapons": [
+        "name",
+        { key: "length", label: "Approx. Length" },
+        { key: "diceAdds", label: "Dice + Adds" },
+        { key: "strengthReq", label: "ST req." },
+        { key: "dexReq", label: "DEX req." },
+        "cost",
+        "weight"
+      ],
+      Spears: [
+        "name",
+        { key: "length", label: "Approx. Length" },
+        { key: "diceAdds", label: "Dice + Adds" },
+        { key: "strengthReq", label: "ST req." },
+        { key: "dexReq", label: "DEX req." },
+        "cost",
+        "weight",
+        "range"
+      ],
+      Daggers: [
+        "name",
+        { key: "diceAdds", label: "Dice + Adds" },
+        { key: "strengthReq", label: "ST req." },
+        { key: "dexReq", label: "DEX req." },
+        "cost",
+        "weight",
+        "range"
+      ],
+      "Projectile Weapons": [
+        "name",
+        { key: "diceAdds", label: "Dice + Adds" },
+        { key: "strengthReq", label: "ST req." },
+        { key: "dexReq", label: "DEX req." },
+        "cost",
+        "weight",
+        "range"
+      ],
+      "Weird Weapons": [
+        "name",
+        { key: "diceAdds", label: "Dice + Adds" },
+        { key: "strengthReq", label: "ST req." },
+        { key: "dexReq", label: "DEX req." },
+        "cost",
+        "weight"
+      ]
+    },
+    weapontypes: [
+      "Swords",
+      "Hafted Weapons",
+      "Pole Weapons",
+      "Spears",
+      "Daggers",
+      "Projectile Weapons",
+      "Weird Weapons"
     ]
   }),
   methods: {
     GetWeapons(arr) {
-      return [
-        {
-          type: `${arr.filter(wpn => wpn.type.includes("Class I"))[0].type}`,
-          data: arr.filter(wpn => wpn.type.includes("Class I"))
-        }
-      ];
+      if (!arr.length > 0) return;
+      if (!arr[0].type)
+        return [
+          {
+            data: arr
+          }
+        ];
+      else
+        return [
+          {
+            type: `${arr.filter(wpn => wpn.type.includes("Class I"))[0].type}`,
+            data: arr.filter(wpn => wpn.type.includes("Class I"))
+          }
+        ];
     },
     trID(item, type) {
       if (!item || type !== "row") return;
       if (item) return { "data-weapon-id": item.id };
-    },
-    checkFormValidity() {
-      const valid = this.$refs.form.checkValidity();
-      this.nameState = valid;
-      return valid;
-    },
-    resetModal() {
-      this.name = "";
-      this.nameState = null;
-    },
-    handleOk(bvModalEvt) {
-      // Prevent modal from closing
-      bvModalEvt.preventDefault();
-      // Trigger submit handler
-      this.handleSubmit();
-    },
-    handleSubmit() {
-      // Exit when the form isn't valid
-      if (!this.checkFormValidity()) {
-        return;
-      }
-      // Push the name to submitted names
-      this.submittedNames.push(this.name);
-      // Hide the modal manually
-      this.$nextTick(() => {
-        this.$bvModal.hide("modal-prevent-closing");
-      });
     }
   }
 };

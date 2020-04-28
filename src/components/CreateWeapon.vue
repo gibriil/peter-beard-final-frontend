@@ -15,14 +15,15 @@
         length,
         extraInfo
     }"
+    @done="$bvModal.hide('addWeapon')"
   >
     <template v-slot="{ mutate, loading, error }">
-      <b-form @submit.stop.prevent="onSubmit && mutate()">
+      <b-form @submit.stop.prevent="mutate()">
         <b-form-group id="name-input-group" label="Name" label-for="name">
           <b-form-input
             id="name"
             name="name"
-            v-model="$v.form.name.$model"
+            v-model="$v.name.$model"
             :state="validateState('name')"
             aria-describedby="name-live-feedback"
           ></b-form-input>
@@ -33,13 +34,14 @@
         </b-form-group>
 
         <b-form-group id="category-input-group" label="Category" label-for="category">
-          <b-form-input
+          <b-form-select
             id="category"
             name="category"
-            v-model="$v.form.category.$model"
+            :options="weaponCategory"
+            v-model="$v.category.$model"
             :state="validateState('category')"
             aria-describedby="category-live-feedback"
-          ></b-form-input>
+          ></b-form-select>
 
           <b-form-invalid-feedback
             id="category-live-feedback"
@@ -47,13 +49,7 @@
         </b-form-group>
 
         <b-form-group id="type-input-group" label="Type" label-for="type">
-          <b-form-input
-            id="type"
-            name="type"
-            v-model="$v.form.type.$model"
-            :state="validateState('type')"
-            aria-describedby="type-live-feedback"
-          ></b-form-input>
+          <b-form-input id="type" name="type" v-model="type" aria-describedby="type-live-feedback"></b-form-input>
 
           <b-form-invalid-feedback
             id="type-live-feedback"
@@ -64,7 +60,8 @@
           <b-form-input
             id="dice"
             name="dice"
-            v-model="$v.form.dice.$model"
+            type="number"
+            v-model.number="$v.dice.$model"
             :state="validateState('dice')"
             aria-describedby="dice-live-feedback"
           ></b-form-input>
@@ -78,7 +75,7 @@
           <b-form-input
             id="adds"
             name="adds"
-            v-model="$v.form.adds.$model"
+            v-model="$v.adds.$model"
             :state="validateState('adds')"
             aria-describedby="adds-live-feedback"
           ></b-form-input>
@@ -96,7 +93,8 @@
           <b-form-input
             id="strengthReq"
             name="strengthReq"
-            v-model="$v.form.strengthReq.$model"
+            type="number"
+            v-model.number="$v.strengthReq.$model"
             :state="validateState('strengthReq')"
             aria-describedby="strengthReq-live-feedback"
           ></b-form-input>
@@ -110,7 +108,8 @@
           <b-form-input
             id="dexReq"
             name="dexReq"
-            v-model="$v.form.dexReq.$model"
+            type="number"
+            v-model.number="$v.dexReq.$model"
             :state="validateState('dexReq')"
             aria-describedby="dexReq-live-feedback"
           ></b-form-input>
@@ -124,7 +123,8 @@
           <b-form-input
             id="cost"
             name="cost"
-            v-model="$v.form.cost.$model"
+            type="number"
+            v-model.number="$v.cost.$model"
             :state="validateState('cost')"
             aria-describedby="cost-live-feedback"
           ></b-form-input>
@@ -138,7 +138,8 @@
           <b-form-input
             id="weight"
             name="weight"
-            v-model="$v.form.weight.$model"
+            type="number"
+            v-model.number="$v.weight.$model"
             :state="validateState('weight')"
             aria-describedby="weight-live-feedback"
           ></b-form-input>
@@ -148,19 +149,46 @@
           >This is a required field and must be at least 3 characters.</b-form-invalid-feedback>
         </b-form-group>
 
-        <b-form-group id="name-input-group" label="Name" label-for="name">
+        <b-form-group id="range-input-group" label="Range" label-for="range">
           <b-form-input
-            id="name"
-            name="name"
-            v-model="$v.form.name.$model"
-            :state="validateState('name')"
-            aria-describedby="name-live-feedback"
+            id="range"
+            name="range"
+            v-model="range"
+            aria-describedby="range-live-feedback"
           ></b-form-input>
 
           <b-form-invalid-feedback
-            id="name-live-feedback"
+            id="range-live-feedback"
           >This is a required field and must be at least 3 characters.</b-form-invalid-feedback>
         </b-form-group>
+
+        <b-form-group id="length-input-group" label="Length" label-for="length">
+          <b-form-input
+            id="length"
+            name="length"
+            v-model="length"
+            aria-describedby="length-live-feedback"
+          ></b-form-input>
+
+          <b-form-invalid-feedback
+            id="length-live-feedback"
+          >This is a required field and must be at least 3 characters.</b-form-invalid-feedback>
+        </b-form-group>
+
+        <b-form-group id="extraInfo-input-group" label="Extra Info" label-for="extraInfo">
+          <b-form-input
+            id="extraInfo"
+            name="extraInfo"
+            v-model="extraInfo"
+            aria-describedby="extraInfo-live-feedback"
+          ></b-form-input>
+
+          <b-form-invalid-feedback
+            id="extraInfo-live-feedback"
+          >This is a required field and must be at least 3 characters.</b-form-invalid-feedback>
+        </b-form-group>
+
+        <b-button type="submit" variant="primary">Submit</b-button>
       </b-form>
       <p v-if="error">An error occurred: {{ error }}</p>
     </template>
@@ -183,49 +211,55 @@ export default {
     dexReq: null,
     cost: null,
     weight: null,
-    range: null,
-    length: null,
-    extraInfo: null
+    range: "",
+    length: "",
+    extraInfo: "",
+    weaponCategory: [
+      { value: null, text: "Choose..." },
+      { value: "Swords", text: "Swords" },
+      { value: "Hafted Weapons", text: "Hafted Weapons" },
+      { value: "Pole Weapons", text: "Pole Weapons" },
+      { value: "Spears", text: "Spears" },
+      { value: "Daggers", text: "Daggers" },
+      { value: "Projectile Weapons", text: "Projectile Weapons" },
+      { value: "Weird Weapons", text: "Weird Weapons" }
+    ]
   }),
   validations: {
-    form: {
-      name: {
-        required,
-        minLength: minLength(3)
-      },
-      category: {
-        required
-      },
-      type: {
-        required
-      },
-      dice: {
-        required,
-        numeric
-      },
-      adds: {
-        numeric
-      },
-      strengthReq: {
-        required,
-        numeric
-      },
-      dexReq: {
-        numeric
-      },
-      cost: {
-        required,
-        numeric
-      },
-      weight: {
-        required,
-        numeric
-      }
+    name: {
+      required,
+      minLength: minLength(3)
+    },
+    category: {
+      required
+    },
+    dice: {
+      required,
+      numeric
+    },
+    adds: {
+      numeric
+    },
+    strengthReq: {
+      required,
+      numeric
+    },
+    dexReq: {
+      required,
+      numeric
+    },
+    cost: {
+      required,
+      numeric
+    },
+    weight: {
+      required,
+      numeric
     }
   },
   methods: {
     validateState(name) {
-      const { $dirty, $error } = this.$v.form[name];
+      const { $dirty, $error } = this.$v[name];
       return $dirty ? !$error : null;
     }
   }
