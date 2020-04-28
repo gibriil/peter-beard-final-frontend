@@ -7,13 +7,20 @@
       </p>
     </div>
 
-    <b-modal id="addWeapon" hide-footer title="Add Weapon" scrollable>
-      <CreateWeapon></CreateWeapon>
-    </b-modal>
-
     <!-- Apollo watched Graphql query -->
     <ApolloQuery :query="require('@/graphql/allWeapons.gql')">
-      <template slot-scope="{ result: { loading, error, data } }">
+      <template slot-scope="{ result: { loading, error, data }, query }">
+        <!-- Add Weapon Popup -->
+        <b-modal
+          id="addWeapon"
+          hide-footer
+          title="Add Weapon"
+          scrollable
+          @hidden="refreshQuery(query)"
+        >
+          <CreateWeapon></CreateWeapon>
+        </b-modal>
+
         <!-- Loading -->
         <div v-if="loading" class="loading apollo">
           <div class="text-center text-danger my-2">
@@ -161,6 +168,9 @@ export default {
     trID(item, type) {
       if (!item || type !== "row") return;
       if (item) return { "data-weapon-id": item.id };
+    },
+    refreshQuery(query) {
+      query.refetch();
     }
   }
 };

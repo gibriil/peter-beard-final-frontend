@@ -8,7 +8,17 @@
     </div>
     <!-- Apollo watched Graphql query -->
     <ApolloQuery :query="require('@/graphql/allSpells.gql')">
-      <template slot-scope="{ result: { loading, error, data } }">
+      <template slot-scope="{ result: { loading, error, data }, query }">
+        <!-- Add Spell Popup -->
+        <b-modal
+          id="addSpell"
+          hide-footer
+          title="Add Spell"
+          scrollable
+          @hidden="refreshQuery(query)"
+        >
+          <CreateSpell></CreateSpell>
+        </b-modal>
         <!-- Loading -->
         <div v-if="loading" class="loading apollo">
           <div class="text-center text-danger my-2">
@@ -56,7 +66,10 @@
   </div>
 </template>
 <script>
+import CreateSpell from "@/components/CreateSpell.vue";
+
 export default {
+  components: { CreateSpell },
   data: () => ({
     fields: [
       "name",
@@ -81,6 +94,9 @@ export default {
     trID(item, type) {
       if (!item || type !== "row") return;
       if (item) return { "data-spell-id": item.id };
+    },
+    refreshQuery(query) {
+      query.refetch();
     }
   }
 };

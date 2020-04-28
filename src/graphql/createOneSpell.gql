@@ -1,0 +1,18 @@
+mutation createOneSpell ($name: String!, $level: Int!, $description: String!, $cost: String!, $range: String!, $symbol: String!) {
+  createOneSpell(data: {
+    name: $name,
+    level: $level,
+    description: $description,
+    cost: $cost,
+    range: $range,
+    symbol: $symbol
+  }) {
+    id,
+    symbol,
+    name,
+    level,
+    description,
+    cost,
+    range
+  }
+}

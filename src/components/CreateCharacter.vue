@@ -369,8 +369,8 @@ export default {
           "https://pbeard-tunnels-and-trolls.herokuapp.com/characters",
           form
         )
-        .then(data => {
-          console.log("Success:", data);
+        .then(res => {
+          console.log("Success:", res.data);
           eBus.$emit("CharacterComponent", {
             component: "GetCharacters"
           });

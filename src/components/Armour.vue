@@ -104,6 +104,9 @@ export default {
     trID(item, type) {
       if (!item || type !== "row") return;
       if (item) return { "data-armour-id": item.id };
+    },
+    refreshQuery(query) {
+      query.refetch();
     }
   }
 };
