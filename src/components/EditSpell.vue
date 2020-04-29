@@ -10,7 +10,7 @@
         cost,
         range
     }"
-    @done="$router.push('/gm-guide')"
+    @done="$bvModal.hide('spellOptions')"
   >
     <template v-slot="{ mutate, loading, error }">
       <h2>Edit Spell</h2>
@@ -97,8 +97,10 @@ import { required, numeric } from "vuelidate/lib/validators";
 export default {
   props: {
     id: {
-      type: String,
-      required: true
+      type: String
+    },
+    spellID: {
+      type: String
     }
   },
   mixins: [validationMixin],
@@ -160,7 +162,7 @@ export default {
     }
   },
   created() {
-    this.$apollo.queries.GetSpell.refetch().then(res => {
+    this.$apollo.queries.spell.refetch().then(res => {
       this.name = res.data.spell.name;
       this.level = res.data.spell.level;
       this.description = res.data.spell.description;
@@ -170,11 +172,11 @@ export default {
     });
   },
   apollo: {
-    GetSpell: {
+    spell: {
       query: require("@/graphql/getSpell.gql"),
       variables() {
         return {
-          id: this.id
+          id: this.id || this.spellID
         };
       }
     }

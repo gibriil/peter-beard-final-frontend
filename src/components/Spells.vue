@@ -19,6 +19,31 @@
         >
           <CreateSpell></CreateSpell>
         </b-modal>
+        <!-- Edit Spell Popup -->
+        <b-modal
+          id="spellOptions"
+          hide-footer
+          title="Spell Options"
+          centered
+          @hidden="refreshQuery(query)"
+        >
+          <b-button v-b-modal.editSpell variant="outline-primary" class="mr-3">
+            <b-icon icon="pencil" class="mr-2"></b-icon>Edit Spell
+          </b-button>
+          <b-button variant="danger">
+            <b-icon icon="trash" class="mr-2"></b-icon>Delete Spell
+          </b-button>
+        </b-modal>
+        <b-modal
+          id="editSpell"
+          hide-footer
+          title="Edit Spell"
+          centered
+          @hidden="$bvModal.hide('spellOptions')"
+        >
+          <EditSpell :spellID="selectedSpell"></EditSpell>
+        </b-modal>
+
         <!-- Loading -->
         <div v-if="isLoading" class="loading apollo">
           <div class="text-danger my-2">
@@ -43,7 +68,7 @@
               fixed
               :items="spells.data"
               :fields="fields"
-              :key="spells.type"
+              :key="spells.id"
               caption-top
               :tbody-tr-attr="trID"
               head-variant="dark"
@@ -69,16 +94,18 @@
 </template>
 <script>
 import CreateSpell from "@/components/CreateSpell.vue";
+import EditSpell from "@/components/EditSpell.vue";
 
 export default {
-  components: { CreateSpell },
+  components: { CreateSpell, EditSpell },
   data: () => ({
     fields: [
       "name",
       "description",
       { key: "cost", label: "Cost/Strength" },
       "range"
-    ]
+    ],
+    selectedSpell: ""
   }),
   methods: {
     GetSpells(arr) {
@@ -102,7 +129,8 @@ export default {
     },
     OnSelect(items) {
       if (items.length > 0) {
-        this.$router.push(`/spell/${items[0].id}`);
+        this.selectedSpell = items[0].id;
+        this.$bvModal.show("spellOptions");
       }
     }
   }
