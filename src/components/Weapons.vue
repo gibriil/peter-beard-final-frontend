@@ -160,8 +160,8 @@ export default {
       else
         return [
           {
-            type: `${arr.filter(wpn => wpn.type.includes("Class I"))[0].type}`,
-            data: arr.filter(wpn => wpn.type.includes("Class I"))
+            type: `${arr.filter(wpn => wpn.type.includes("Class I:"))[0].type}`,
+            data: arr.filter(wpn => wpn.type.includes("Class I:"))
           }
         ];
     },

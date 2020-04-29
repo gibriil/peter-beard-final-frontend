@@ -133,7 +133,7 @@ export default {
     ],
     symbols: [
       { value: null, text: "Choose..." },
-      { value: "circle", text: "Triangle" },
+      { value: "circle", text: "Circle" },
       { value: "triangle", text: "Triangle" }
     ]
   }),
