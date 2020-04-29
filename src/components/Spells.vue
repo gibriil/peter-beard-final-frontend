@@ -55,7 +55,7 @@
             Are you sure you really want to delete this
             <strong>Spell</strong>?
           </p>
-          <b-button variant="danger">
+          <b-button variant="danger" @click="DeleteSpell">
             <b-icon icon="trash" class="mr-2"></b-icon>Delete Spell
           </b-button>
         </b-modal>
@@ -148,6 +148,24 @@ export default {
         this.selectedSpell = items[0].id;
         this.$bvModal.show("spellOptions");
       }
+    },
+    DeleteSpell() {
+      this.$apollo
+        .mutate({
+          mutation: require("@/graphql/deleteOneSpell.gql"),
+          variables: {
+            id: this.selectedSpell
+          }
+        })
+        .then(res => {
+          this.$bvModal.hide("deleteSpell");
+          console.log(
+            `Spell Deleted: ${res.data.deleteOneSpell.name} -- ${res.data.deleteOneSpell.id}`
+          );
+        })
+        .catch(error => {
+          console.error(error);
+        });
     }
   }
 };

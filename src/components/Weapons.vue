@@ -56,7 +56,7 @@
             Are you sure you really want to delete this
             <strong>Weapon</strong>?
           </p>
-          <b-button variant="danger">
+          <b-button variant="danger" @click="DeleteWeapon">
             <b-icon icon="trash" class="mr-2"></b-icon>Delete Weapon
           </b-button>
         </b-modal>
@@ -221,6 +221,24 @@ export default {
         this.selectedWeapon = items[0].id;
         this.$bvModal.show("weaponOptions");
       }
+    },
+    DeleteWeapon() {
+      this.$apollo
+        .mutate({
+          mutation: require("@/graphql/deleteOneWeapon.gql"),
+          variables: {
+            id: this.selectedWeapon
+          }
+        })
+        .then(res => {
+          this.$bvModal.hide("deleteWeapon");
+          console.log(
+            `Spell Deleted: ${res.data.deleteOneWeapon.name} -- ${res.data.deleteOneWeapon.id}`
+          );
+        })
+        .catch(error => {
+          console.error(error);
+        });
     }
   }
 };

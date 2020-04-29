@@ -1,0 +1,8 @@
+mutation deleteOneSpell($id: String!){
+  deleteOneSpell(where: {
+    id: $id
+  }) {
+    id,
+    name
+  }
+}

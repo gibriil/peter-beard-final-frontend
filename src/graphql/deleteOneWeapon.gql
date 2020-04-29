@@ -1,0 +1,8 @@
+mutation deleteOneWeapon($id: String!) {
+  deleteOneWeapon(where: {
+    id: $id
+  }) {
+    id,
+    name
+  }
+}
