@@ -1,7 +1,9 @@
 <template>
   <header>
     <b-navbar toggleable="lg" type="dark" variant="dark" sticky>
-      <b-navbar-brand to="/">Tunnels &amp; Trolls</b-navbar-brand>
+      <b-navbar-brand to="/">
+        <img :src="require(`@/assets/tnt-white.png`)" height="60" width="60" aria-hidden="true" />Tunnels &amp; Trolls
+      </b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
