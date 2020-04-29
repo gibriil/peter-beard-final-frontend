@@ -2,7 +2,7 @@
   <ApolloMutation
     :mutation="require('@/graphql/updateOneSpell.gql')"
     :variables="{
-        id,
+        id: id || spellID,
         symbol,
         name,
         level,
@@ -10,7 +10,7 @@
         cost,
         range
     }"
-    @done="$bvModal.hide('spellOptions')"
+    @done="$bvModal.hide('editSpell')"
   >
     <template v-slot="{ mutate, loading, error }">
       <h2>Edit Spell</h2>

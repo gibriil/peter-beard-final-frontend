@@ -20,6 +20,46 @@
         >
           <CreateWeapon></CreateWeapon>
         </b-modal>
+        <!-- Edit Weapon Popup -->
+        <b-modal
+          id="weaponOptions"
+          hide-footer
+          title="Weapon Options"
+          centered
+          @hidden="refreshQuery(query)"
+        >
+          <b-button v-b-modal.editWeapon variant="outline-primary" class="mr-3">
+            <b-icon icon="pencil" class="mr-2"></b-icon>Edit Weapon
+          </b-button>
+          <b-button v-b-modal.deleteWeapon variant="danger">
+            <b-icon icon="trash" class="mr-2"></b-icon>Delete Weapon
+          </b-button>
+        </b-modal>
+        <b-modal
+          id="editWeapon"
+          hide-footer
+          title="Edit Weapon"
+          centered
+          @hidden="$bvModal.hide('weaponOptions')"
+        >
+          <EditWeapon :weaponID="selectedWeapon"></EditWeapon>
+        </b-modal>
+        <!-- Delete Weapon Popup -->
+        <b-modal
+          id="deleteWeapon"
+          hide-footer
+          title="Delete Weapon"
+          centered
+          @hidden="$bvModal.hide('weaponOptions')"
+        >
+          <p>
+            Are you sure you really want to delete this
+            <strong>Weapon</strong>?
+          </p>
+          <b-button variant="danger">
+            <b-icon icon="trash" class="mr-2"></b-icon>Delete Weapon
+          </b-button>
+        </b-modal>
 
         <!-- Loading -->
         <div v-if="isLoading" class="loading apollo">
@@ -42,6 +82,8 @@
                 small
                 hover
                 selectable
+                select-mode="single"
+                @row-selected="OnSelect"
                 :items="weapon.data"
                 :fields="weapontables[wpn]"
                 :key="weapon.type || weapon.category"
@@ -71,10 +113,12 @@
 
 <script>
 import CreateWeapon from "@/components/CreateWeapon.vue";
+import EditWeapon from "@/components/EditWeapon.vue";
 
 export default {
-  components: { CreateWeapon },
+  components: { CreateWeapon, EditWeapon },
   data: () => ({
+    selectedWeapon: "",
     weapontables: {
       Swords: [
         "name",
@@ -171,6 +215,12 @@ export default {
     },
     refreshQuery(query) {
       query.refetch();
+    },
+    OnSelect(items) {
+      if (items.length > 0) {
+        this.selectedWeapon = items[0].id;
+        this.$bvModal.show("weaponOptions");
+      }
     }
   }
 };

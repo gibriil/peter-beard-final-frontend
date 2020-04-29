@@ -1,0 +1,19 @@
+query weapon($id: String!) {
+  weapon(where: {
+        id: $id
+      }) {
+    id,
+    name,
+    category,
+    type,
+    dice,
+    adds,
+    strengthReq,
+    dexReq,
+    cost,
+    weight,
+    range,
+    length,
+    extraInfo
+  }
+}

@@ -30,7 +30,7 @@
           <b-button v-b-modal.editSpell variant="outline-primary" class="mr-3">
             <b-icon icon="pencil" class="mr-2"></b-icon>Edit Spell
           </b-button>
-          <b-button variant="danger">
+          <b-button v-b-modal.deleteSpell variant="danger">
             <b-icon icon="trash" class="mr-2"></b-icon>Delete Spell
           </b-button>
         </b-modal>
@@ -42,6 +42,22 @@
           @hidden="$bvModal.hide('spellOptions')"
         >
           <EditSpell :spellID="selectedSpell"></EditSpell>
+        </b-modal>
+        <!-- Delete Spell Popup -->
+        <b-modal
+          id="deleteSpell"
+          hide-footer
+          title="Delete Spell"
+          centered
+          @hidden="$bvModal.hide('spellOptions')"
+        >
+          <p>
+            Are you sure you really want to delete this
+            <strong>Spell</strong>?
+          </p>
+          <b-button variant="danger">
+            <b-icon icon="trash" class="mr-2"></b-icon>Delete Spell
+          </b-button>
         </b-modal>
 
         <!-- Loading -->

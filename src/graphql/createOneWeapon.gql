@@ -15,9 +15,16 @@ mutation createOneWeapon($name: String!, $category: String!, $type: String!, $di
       }) {
     id,
     name,
+    category,
+    type,
     dice,
     adds,
+    strengthReq,
+    dexReq,
     cost,
-    weight
+    weight,
+    range,
+    length,
+    extraInfo
   }
 }
