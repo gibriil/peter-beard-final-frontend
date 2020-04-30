@@ -8,7 +8,11 @@
       <b-container fluid="xl">
         <b-row class="justify-content-center">
           <b-col>
-            <b-img :src="require('@/assets/tnt-vitalspots.png')" fluid-grow alt="Fluid-grow image"></b-img>
+            <b-img
+              :src="require('@/assets/tnt-vitalspots.png')"
+              fluid-grow
+              alt="Ha-Ha! Yah missed all my vital spots!!"
+            ></b-img>
           </b-col>
         </b-row>
       </b-container>
