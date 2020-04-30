@@ -1,10 +1,14 @@
 <template>
   <div id="gmGuide">
-    <b-jumbotron fluid>
+    <b-jumbotron
+      fluid
+      class="fullbleed bg-image"
+      :style="'background-image: url('+require('@/assets/bg-4.jpg')+');'"
+    >
       <template v-slot:header>Game Master's Guide</template>
       <template
         v-slot:lead
-      >API output for GraphGL queries for Weapons, Armour, and Spells. Restful API output for General Supplies</template>
+      >GraphGL query output for Weapons, Armour, and Spells. Restful API output for General Supplies</template>
       <b-button-group size="lg" class="flex-wrap">
         <b-button
           :to="'/gm-guide/weapons'"
@@ -48,3 +52,11 @@ export default {
   })
 };
 </script>
+
+<style lang="less" scoped>
+.bg-image {
+  background-size: cover;
+  background-position: center 33%;
+  background-repeat: no-repeat;
+}
+</style>

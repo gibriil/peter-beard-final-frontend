@@ -30,4 +30,19 @@ export default {
 </script>
 
 <style lang="less">
+.fullbleed,
+.fullbleed * {
+  position: relative;
+}
+
+.fullbleed:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: inherit;
+  top: 0;
+  left: 0;
+  opacity: 0.8;
+}
 </style>

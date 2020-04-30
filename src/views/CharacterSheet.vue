@@ -1,8 +1,14 @@
 <template>
   <div id="charcterSheets">
-    <b-jumbotron fluid>
+    <b-jumbotron
+      fluid
+      class="fullbleed bg-image"
+      :style="'background-image: url('+require('@/assets/bg-3.jpg')+');'"
+    >
       <template v-slot:header>Character Sheets</template>
-      <template v-slot:lead>View Pre-Made Charcter Sheets, or Create your own</template>
+      <template
+        v-slot:lead
+      >View Pre-Made Charcter Sheets retrieved from a RESTful API endpoint, or Create your own Character Sheet</template>
       <b-button-group size="lg" class="flex-wrap">
         <b-button
           @click="restapi.component = 'GetCharacters'"
@@ -46,3 +52,11 @@ export default {
   }
 };
 </script>
+
+<style lang="less" scoped>
+.bg-image {
+  background-size: cover;
+  background-position: center 33%;
+  background-repeat: no-repeat;
+}
+</style>
