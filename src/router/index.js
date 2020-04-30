@@ -7,6 +7,7 @@ import Weapons from "@/components/Weapons.vue";
 import Armour from "@/components/Armour.vue";
 import Spells from "@/components/Spells.vue";
 import GenSupplies from "@/components/GenSupplies.vue";
+import FourOFour from "@/views/404.vue";
 
 Vue.use(VueRouter)
 
@@ -41,12 +42,8 @@ const routes = [{
     ]
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import( /* webpackChunkName: "about" */ '../views/About.vue')
+    path: "*",
+    component: FourOFour
   }
 ]
 
