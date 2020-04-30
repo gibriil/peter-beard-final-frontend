@@ -10,10 +10,14 @@
         <b-icon icon="trash" class="mr-2"></b-icon>Delete Character
       </b-button>
     </b-modal>
+    <!-- Edit Character Popup -->
+    <b-modal id="editCharacter" hide-footer title="Edit Character" @hidden="GetCharacters">
+      <EditCharacter :characterID="selectedCharacter"></EditCharacter>
+    </b-modal>
     <b-card-group columns>
       <b-card v-for="character in characters" :key="character._id">
         <b-card-title title-tag="div" class="text-right" @click="selectedCharacter = character._id">
-          <b-button variant="outline-primary" class="mr-3">
+          <b-button v-b-modal.editCharacter variant="outline-primary" class="mr-3">
             <b-icon icon="pencil" class="mr-2"></b-icon>Edit Character
           </b-button>
           <b-button v-b-modal.deleteCharacter variant="danger">
@@ -117,8 +121,10 @@
 </template>
 <script>
 import axios from "axios";
+import EditCharacter from "@/components/EditCharacter.vue";
 
 export default {
+  components: { EditCharacter },
   data: () => ({
     characters: [],
     selectedCharacter: ""
@@ -133,6 +139,7 @@ export default {
     },
     GetCharacters() {
       let $vm = this;
+      $vm.selectedCharacter = "";
       axios
         .get("https://pbeard-tunnels-and-trolls.herokuapp.com/characters")
         .then(res => {
