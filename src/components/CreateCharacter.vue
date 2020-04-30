@@ -378,28 +378,6 @@ export default {
         .catch(error => {
           console.error("Error:", error);
         });
-
-      // this.form = {
-      //   name: null,
-      //   kin: null,
-      //   type: null,
-      //   sex: null,
-      //   lvl: null,
-      //   age: null,
-      //   height: null,
-      //   weight: null,
-      //   ST: null,
-      //   IQ: null,
-      //   LK: null,
-      //   CON: null,
-      //   DEX: null,
-      //   CHR: null,
-      //   personalAdds: null,
-      //   weightPossible: null,
-      //   weightCarried: null,
-      //   gp: null,
-      //   ap: null
-      // };
     }
   }
 };

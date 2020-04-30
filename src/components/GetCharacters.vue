@@ -1,7 +1,25 @@
 <template>
   <div id="RestfulGetCharcaters">
+    <!-- Delete Character Popup -->
+    <b-modal id="deleteCharacter" hide-footer title="Delete Character" centered>
+      <p>
+        Are you sure you really want to delete this
+        <strong>Character</strong>?
+      </p>
+      <b-button variant="danger" @click="DeleteCharacter">
+        <b-icon icon="trash" class="mr-2"></b-icon>Delete Character
+      </b-button>
+    </b-modal>
     <b-card-group columns>
       <b-card v-for="character in characters" :key="character._id">
+        <b-card-title title-tag="div" class="text-right" @click="selectedCharacter = character._id">
+          <b-button variant="outline-primary" class="mr-3">
+            <b-icon icon="pencil" class="mr-2"></b-icon>Edit Character
+          </b-button>
+          <b-button v-b-modal.deleteCharacter variant="danger">
+            <b-icon icon="trash" class="mr-2"></b-icon>Delete Character
+          </b-button>
+        </b-card-title>
         <b-card-body>
           <b-container fluid>
             <b-row>
@@ -102,21 +120,39 @@ import axios from "axios";
 
 export default {
   data: () => ({
-    characters: []
+    characters: [],
+    selectedCharacter: ""
   }),
   created() {
-    let $vm = this;
-    axios
-      .get("https://pbeard-tunnels-and-trolls.herokuapp.com/characters")
-      .then(res => {
-        $vm.characters = res.data.reverse() || [];
-      })
-      .catch(err => console.log(err));
+    this.GetCharacters();
   },
   methods: {
     trID(item, type) {
       if (!item || type !== "row") return;
       if (item) return { "data-weapon-id": item._id };
+    },
+    GetCharacters() {
+      let $vm = this;
+      axios
+        .get("https://pbeard-tunnels-and-trolls.herokuapp.com/characters")
+        .then(res => {
+          $vm.characters = res.data.reverse() || [];
+        })
+        .catch(err => console.log(err));
+    },
+    DeleteCharacter() {
+      let $vm = this;
+      axios
+        .delete("https://pbeard-tunnels-and-trolls.herokuapp.com/characters", {
+          data: {
+            _id: $vm.selectedCharacter
+          }
+        })
+        .then(function() {
+          $vm.$bvModal.hide("deleteCharacter");
+          $vm.GetCharacters();
+        })
+        .catch(err => console.log(err));
     }
   }
 };
