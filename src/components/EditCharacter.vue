@@ -1,6 +1,12 @@
 <template>
   <div id="characterEdit">
-    <b-form @submit.stop.prevent="onSubmit">
+    <template v-if="form.name == null">
+      <div class="text-center text-danger my-2">
+        <b-spinner class="align-middle mr-2"></b-spinner>
+        <strong>Loading...</strong>
+      </div>
+    </template>
+    <b-form v-else @submit.stop.prevent="onSubmit">
       <b-form-group id="name-input-group" label="Name" label-for="name">
         <b-form-input
           id="name"

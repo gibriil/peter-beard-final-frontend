@@ -14,7 +14,14 @@
     <b-modal id="editCharacter" hide-footer title="Edit Character" @hidden="GetCharacters">
       <EditCharacter :characterID="selectedCharacter"></EditCharacter>
     </b-modal>
-    <b-card-group columns>
+
+    <template v-if="!(characters.length > 0)">
+      <div class="text-center text-danger my-2">
+        <b-spinner class="align-middle mr-2"></b-spinner>
+        <strong>Loading...</strong>
+      </div>
+    </template>
+    <b-card-group v-else columns>
       <b-card v-for="character in characters" :key="character._id">
         <b-card-title title-tag="div" class="text-right" @click="selectedCharacter = character._id">
           <b-button v-b-modal.editCharacter variant="outline-primary" class="mr-3">
